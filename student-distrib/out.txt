@@ -1,0 +1,38 @@
+gcc  -nostdinc -g  -c -o boot.o boot.S
+gcc  -nostdinc -g  -c -o x86_desc.o x86_desc.S
+gcc  -nostdinc -g  -c -o kernel/asm_linkage.o kernel/asm_linkage.S
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o kernel.o kernel.c
+kernel.c: In function ‘entry’:
+kernel.c:241: warning: pointer targets in passing argument 1 of ‘ece391_execute’ differ in signedness
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o drivers/fs.o drivers/fs.c
+drivers/fs.c: In function ‘file_open’:
+drivers/fs.c:199: warning: pointer targets in passing argument 1 of ‘read_dentry_by_name’ differ in signedness
+drivers/fs.c:211: warning: assignment from incompatible pointer type
+drivers/fs.c:214: warning: assignment from incompatible pointer type
+drivers/fs.c:217: warning: assignment from incompatible pointer type
+drivers/fs.c:393:2: warning: no newline at end of file
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o drivers/i8259.o drivers/i8259.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o drivers/keyboard.o drivers/keyboard.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o drivers/rtc.o drivers/rtc.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o drivers/termios.o drivers/termios.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o kernel/exception.o kernel/exception.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o kernel/irq.o kernel/irq.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o kernel/paging.o kernel/paging.c
+kernel/paging.c: In function ‘paging_allocate’:
+kernel/paging.c:125: warning: unused variable ‘i’
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o kernel/pcb.o kernel/pcb.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o kernel/syscall.o kernel/syscall.c
+kernel/syscall.c: In function ‘syscall_execute’:
+kernel/syscall.c:96: warning: pointer targets in passing argument 1 of ‘read_dentry_by_name’ differ in signedness
+kernel/syscall.c:107: warning: pointer targets in passing argument 1 of ‘loader’ differ in signedness
+kernel/syscall.c:120: warning: assignment from incompatible pointer type
+kernel/syscall.c:56: warning: unused variable ‘buf’
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o kernel/tasks.o kernel/tasks.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o lib/lib.o lib/lib.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o lib/ring_buffer.o lib/ring_buffer.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o tests/fs_test.o tests/fs_test.c
+gcc -Wall -fno-builtin -fno-stack-protector -nostdlib -nostdinc -g  -c -o tests/rtc_test.o tests/rtc_test.c
+tests/rtc_test.c: In function ‘test_rtc’:
+tests/rtc_test.c:94: warning: pointer targets in passing argument 3 of ‘read_data’ differ in signedness
+gcc -nostdlib -static boot.o x86_desc.o kernel/asm_linkage.o kernel.o drivers/fs.o drivers/i8259.o drivers/keyboard.o drivers/rtc.o drivers/termios.o kernel/exception.o kernel/irq.o kernel/paging.o kernel/pcb.o kernel/syscall.o kernel/tasks.o lib/lib.o lib/ring_buffer.o tests/fs_test.o tests/rtc_test.o  -Ttext=0x400000 -o bootimg
+sudo ./debug.sh

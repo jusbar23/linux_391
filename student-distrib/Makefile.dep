@@ -1,0 +1,241 @@
+boot.o: boot.S multiboot.h x86_desc.h lib/types.h
+x86_desc.o: x86_desc.S x86_desc.h lib/types.h
+kernel.o: kernel.c multiboot.h lib/types.h x86_desc.h lib/lib.h \
+  lib/types.h drivers/i8259.h drivers/../lib/types.h drivers/../lib/lib.h \
+  debug.h kernel/irq.h kernel/../x86_desc.h kernel/../lib/lib.h \
+  kernel/../drivers/rtc.h kernel/../drivers/../lib/lib.h \
+  kernel/../drivers/i8259.h kernel/../drivers/pit.h \
+  kernel/../drivers/../lib/types.h kernel/../drivers/soundblaster.h \
+  kernel/../drivers/../kernel/syscall.h kernel/../drivers/../kernel/pcb.h \
+  kernel/../drivers/../kernel/../lib/types.h \
+  kernel/../drivers/../kernel/../drivers/fs.h \
+  kernel/../drivers/../kernel/../drivers/../lib/lib.h \
+  kernel/../drivers/../kernel/../drivers/../lib/types.h \
+  kernel/../drivers/../kernel/../drivers/../multiboot.h \
+  kernel/../drivers/../kernel/../drivers/../kernel/pcb.h \
+  kernel/../drivers/../kernel/../drivers/termios.h \
+  kernel/../drivers/../kernel/../drivers/keyboard.h \
+  kernel/../drivers/../kernel/../drivers/i8259.h \
+  kernel/../drivers/../kernel/../drivers/../lib/ring_buffer.h \
+  kernel/../drivers/../kernel/../drivers/termios.h \
+  kernel/../drivers/../kernel/../drivers/rtc.h \
+  kernel/../drivers/../kernel/../drivers/pit.h kernel/asm_linkage.h \
+  kernel/syscall.h drivers/rtc.h kernel/exception.h kernel/irq.h \
+  kernel/paging.h drivers/keyboard.h drivers/termios.h drivers/fs.h \
+  tests/tests_files.h kernel/tasks.h kernel/pcb.h drivers/pit.h \
+  kernel/scheduling.h kernel/../drivers/i8259.h \
+  kernel/../drivers/termios.h drivers/soundblaster.h
+fs.o: drivers/fs.c drivers/fs.h drivers/../lib/lib.h \
+  drivers/../lib/types.h drivers/../lib/types.h drivers/../multiboot.h \
+  drivers/../lib/types.h drivers/../kernel/pcb.h \
+  drivers/../kernel/../lib/types.h drivers/../kernel/../drivers/fs.h \
+  drivers/../kernel/../drivers/termios.h \
+  drivers/../kernel/../drivers/../lib/types.h \
+  drivers/../kernel/../drivers/keyboard.h \
+  drivers/../kernel/../drivers/i8259.h \
+  drivers/../kernel/../drivers/../lib/lib.h \
+  drivers/../kernel/../drivers/../lib/ring_buffer.h \
+  drivers/../kernel/../drivers/termios.h \
+  drivers/../kernel/../drivers/rtc.h drivers/../kernel/../drivers/pit.h
+i8259.o: drivers/i8259.c drivers/i8259.h drivers/../lib/types.h \
+  drivers/../lib/lib.h drivers/../lib/types.h
+keyboard.o: drivers/keyboard.c drivers/keyboard.h drivers/i8259.h \
+  drivers/../lib/types.h drivers/../lib/lib.h drivers/../lib/types.h \
+  drivers/../lib/ring_buffer.h drivers/termios.h \
+  drivers/../kernel/syscall.h drivers/../kernel/pcb.h \
+  drivers/../kernel/../lib/types.h drivers/../kernel/../drivers/fs.h \
+  drivers/../kernel/../drivers/../lib/lib.h \
+  drivers/../kernel/../drivers/../lib/types.h \
+  drivers/../kernel/../drivers/../multiboot.h \
+  drivers/../kernel/../drivers/../lib/types.h \
+  drivers/../kernel/../drivers/../kernel/pcb.h \
+  drivers/../kernel/../drivers/termios.h \
+  drivers/../kernel/../drivers/rtc.h drivers/../kernel/../drivers/i8259.h \
+  drivers/../kernel/../drivers/pit.h drivers/../kernel/tasks.h
+pit.o: drivers/pit.c drivers/pit.h drivers/../lib/lib.h \
+  drivers/../lib/types.h drivers/../lib/types.h \
+  drivers/../kernel/scheduling.h drivers/../kernel/../drivers/i8259.h \
+  drivers/../kernel/../drivers/../lib/types.h \
+  drivers/../kernel/../drivers/../lib/lib.h \
+  drivers/../kernel/../drivers/pit.h drivers/../kernel/syscall.h \
+  drivers/../kernel/pcb.h drivers/../kernel/../lib/types.h \
+  drivers/../kernel/../drivers/fs.h \
+  drivers/../kernel/../drivers/../multiboot.h \
+  drivers/../kernel/../drivers/../lib/types.h \
+  drivers/../kernel/../drivers/../kernel/pcb.h \
+  drivers/../kernel/../drivers/termios.h \
+  drivers/../kernel/../drivers/keyboard.h \
+  drivers/../kernel/../drivers/i8259.h \
+  drivers/../kernel/../drivers/../lib/ring_buffer.h \
+  drivers/../kernel/../drivers/termios.h \
+  drivers/../kernel/../drivers/rtc.h drivers/../kernel/irq.h \
+  drivers/../kernel/../x86_desc.h drivers/../kernel/../lib/types.h \
+  drivers/../kernel/../lib/lib.h \
+  drivers/../kernel/../drivers/soundblaster.h \
+  drivers/../kernel/../drivers/../kernel/syscall.h \
+  drivers/../kernel/asm_linkage.h
+rtc.o: drivers/rtc.c drivers/rtc.h drivers/../lib/lib.h \
+  drivers/../lib/types.h drivers/i8259.h drivers/../lib/types.h
+soundblaster.o: drivers/soundblaster.c drivers/soundblaster.h \
+  drivers/i8259.h drivers/../lib/types.h drivers/../lib/lib.h \
+  drivers/../lib/types.h drivers/../kernel/syscall.h \
+  drivers/../kernel/pcb.h drivers/../kernel/../lib/types.h \
+  drivers/../kernel/../drivers/fs.h \
+  drivers/../kernel/../drivers/../lib/lib.h \
+  drivers/../kernel/../drivers/../lib/types.h \
+  drivers/../kernel/../drivers/../multiboot.h \
+  drivers/../kernel/../drivers/../lib/types.h \
+  drivers/../kernel/../drivers/../kernel/pcb.h \
+  drivers/../kernel/../drivers/termios.h \
+  drivers/../kernel/../drivers/keyboard.h \
+  drivers/../kernel/../drivers/i8259.h \
+  drivers/../kernel/../drivers/../lib/ring_buffer.h \
+  drivers/../kernel/../drivers/termios.h \
+  drivers/../kernel/../drivers/rtc.h drivers/../kernel/../drivers/pit.h
+termios.o: drivers/termios.c drivers/termios.h drivers/../lib/types.h \
+  drivers/keyboard.h drivers/i8259.h drivers/../lib/lib.h \
+  drivers/../lib/types.h drivers/../lib/ring_buffer.h \
+  drivers/../kernel/pcb.h drivers/../kernel/../lib/types.h \
+  drivers/../kernel/../drivers/fs.h \
+  drivers/../kernel/../drivers/../lib/lib.h \
+  drivers/../kernel/../drivers/../lib/types.h \
+  drivers/../kernel/../drivers/../multiboot.h \
+  drivers/../kernel/../drivers/../lib/types.h \
+  drivers/../kernel/../drivers/../kernel/pcb.h \
+  drivers/../kernel/../drivers/termios.h \
+  drivers/../kernel/../drivers/rtc.h drivers/../kernel/../drivers/i8259.h \
+  drivers/../kernel/../drivers/pit.h drivers/../kernel/paging.h \
+  drivers/../kernel/../lib/lib.h
+exception.o: kernel/exception.c kernel/exception.h kernel/irq.h \
+  kernel/../x86_desc.h kernel/../lib/types.h kernel/../lib/lib.h \
+  kernel/../lib/types.h kernel/../drivers/rtc.h \
+  kernel/../drivers/../lib/lib.h kernel/../drivers/i8259.h \
+  kernel/../drivers/../lib/types.h kernel/../drivers/pit.h \
+  kernel/../drivers/soundblaster.h kernel/../drivers/../kernel/syscall.h \
+  kernel/../drivers/../kernel/pcb.h \
+  kernel/../drivers/../kernel/../lib/types.h \
+  kernel/../drivers/../kernel/../drivers/fs.h \
+  kernel/../drivers/../kernel/../drivers/../lib/lib.h \
+  kernel/../drivers/../kernel/../drivers/../lib/types.h \
+  kernel/../drivers/../kernel/../drivers/../multiboot.h \
+  kernel/../drivers/../kernel/../drivers/../lib/types.h \
+  kernel/../drivers/../kernel/../drivers/../kernel/pcb.h \
+  kernel/../drivers/../kernel/../drivers/termios.h \
+  kernel/../drivers/../kernel/../drivers/keyboard.h \
+  kernel/../drivers/../kernel/../drivers/i8259.h \
+  kernel/../drivers/../kernel/../drivers/../lib/ring_buffer.h \
+  kernel/../drivers/../kernel/../drivers/termios.h \
+  kernel/../drivers/../kernel/../drivers/rtc.h \
+  kernel/../drivers/../kernel/../drivers/pit.h kernel/asm_linkage.h \
+  kernel/syscall.h
+irq.o: kernel/irq.c kernel/irq.h kernel/../x86_desc.h \
+  kernel/../lib/types.h kernel/../lib/lib.h kernel/../lib/types.h \
+  kernel/../drivers/rtc.h kernel/../drivers/../lib/lib.h \
+  kernel/../drivers/i8259.h kernel/../drivers/../lib/types.h \
+  kernel/../drivers/pit.h kernel/../drivers/soundblaster.h \
+  kernel/../drivers/../kernel/syscall.h kernel/../drivers/../kernel/pcb.h \
+  kernel/../drivers/../kernel/../lib/types.h \
+  kernel/../drivers/../kernel/../drivers/fs.h \
+  kernel/../drivers/../kernel/../drivers/../lib/lib.h \
+  kernel/../drivers/../kernel/../drivers/../lib/types.h \
+  kernel/../drivers/../kernel/../drivers/../multiboot.h \
+  kernel/../drivers/../kernel/../drivers/../lib/types.h \
+  kernel/../drivers/../kernel/../drivers/../kernel/pcb.h \
+  kernel/../drivers/../kernel/../drivers/termios.h \
+  kernel/../drivers/../kernel/../drivers/keyboard.h \
+  kernel/../drivers/../kernel/../drivers/i8259.h \
+  kernel/../drivers/../kernel/../drivers/../lib/ring_buffer.h \
+  kernel/../drivers/../kernel/../drivers/termios.h \
+  kernel/../drivers/../kernel/../drivers/rtc.h \
+  kernel/../drivers/../kernel/../drivers/pit.h kernel/asm_linkage.h \
+  kernel/syscall.h
+paging.o: kernel/paging.c kernel/../kernel/paging.h \
+  kernel/../kernel/../lib/lib.h kernel/../kernel/../lib/types.h \
+  kernel/../kernel/tasks.h kernel/../kernel/pcb.h \
+  kernel/../kernel/../lib/types.h kernel/../kernel/../drivers/fs.h \
+  kernel/../kernel/../drivers/../lib/lib.h \
+  kernel/../kernel/../drivers/../lib/types.h \
+  kernel/../kernel/../drivers/../multiboot.h \
+  kernel/../kernel/../drivers/../lib/types.h \
+  kernel/../kernel/../drivers/../kernel/pcb.h \
+  kernel/../kernel/../drivers/termios.h \
+  kernel/../kernel/../drivers/keyboard.h \
+  kernel/../kernel/../drivers/i8259.h \
+  kernel/../kernel/../drivers/../lib/ring_buffer.h \
+  kernel/../kernel/../drivers/termios.h kernel/../kernel/../drivers/rtc.h \
+  kernel/../kernel/../drivers/pit.h
+pcb.o: kernel/pcb.c kernel/pcb.h kernel/../lib/types.h \
+  kernel/../drivers/fs.h kernel/../drivers/../lib/lib.h \
+  kernel/../drivers/../lib/types.h kernel/../drivers/../lib/types.h \
+  kernel/../drivers/../multiboot.h kernel/../drivers/../lib/types.h \
+  kernel/../drivers/../kernel/pcb.h kernel/../drivers/termios.h \
+  kernel/../drivers/keyboard.h kernel/../drivers/i8259.h \
+  kernel/../drivers/../lib/ring_buffer.h kernel/../drivers/termios.h \
+  kernel/../drivers/rtc.h kernel/../drivers/pit.h
+scheduling.o: kernel/scheduling.c kernel/scheduling.h \
+  kernel/../drivers/i8259.h kernel/../drivers/../lib/types.h \
+  kernel/../drivers/../lib/lib.h kernel/../drivers/../lib/types.h \
+  kernel/../drivers/pit.h kernel/syscall.h kernel/pcb.h \
+  kernel/../lib/types.h kernel/../drivers/fs.h \
+  kernel/../drivers/../multiboot.h kernel/../drivers/../lib/types.h \
+  kernel/../drivers/../kernel/pcb.h kernel/../drivers/termios.h \
+  kernel/../drivers/keyboard.h kernel/../drivers/i8259.h \
+  kernel/../drivers/../lib/ring_buffer.h kernel/../drivers/termios.h \
+  kernel/../drivers/rtc.h kernel/tasks.h kernel/../x86_desc.h \
+  kernel/../lib/types.h kernel/paging.h kernel/../lib/lib.h
+syscall.o: kernel/syscall.c kernel/syscall.h kernel/pcb.h \
+  kernel/../lib/types.h kernel/../drivers/fs.h \
+  kernel/../drivers/../lib/lib.h kernel/../drivers/../lib/types.h \
+  kernel/../drivers/../lib/types.h kernel/../drivers/../multiboot.h \
+  kernel/../drivers/../lib/types.h kernel/../drivers/../kernel/pcb.h \
+  kernel/../drivers/termios.h kernel/../drivers/keyboard.h \
+  kernel/../drivers/i8259.h kernel/../drivers/../lib/ring_buffer.h \
+  kernel/../drivers/termios.h kernel/../drivers/rtc.h \
+  kernel/../drivers/pit.h kernel/tasks.h kernel/asm_linkage.h \
+  kernel/../x86_desc.h kernel/../lib/types.h kernel/paging.h \
+  kernel/../lib/lib.h kernel/scheduling.h kernel/../drivers/i8259.h
+tasks.o: kernel/tasks.c kernel/tasks.h kernel/pcb.h kernel/../lib/types.h \
+  kernel/../drivers/fs.h kernel/../drivers/../lib/lib.h \
+  kernel/../drivers/../lib/types.h kernel/../drivers/../lib/types.h \
+  kernel/../drivers/../multiboot.h kernel/../drivers/../lib/types.h \
+  kernel/../drivers/../kernel/pcb.h kernel/../drivers/termios.h \
+  kernel/../drivers/keyboard.h kernel/../drivers/i8259.h \
+  kernel/../drivers/../lib/ring_buffer.h kernel/../drivers/termios.h \
+  kernel/../drivers/rtc.h kernel/../drivers/pit.h
+lib.o: lib/lib.c lib/lib.h lib/types.h
+ring_buffer.o: lib/ring_buffer.c lib/ring_buffer.h
+fs_test.o: tests/fs_test.c tests/../drivers/fs.h \
+  tests/../drivers/../lib/lib.h tests/../drivers/../lib/types.h \
+  tests/../drivers/../lib/types.h tests/../drivers/../multiboot.h \
+  tests/../drivers/../lib/types.h tests/../drivers/../kernel/pcb.h \
+  tests/../drivers/../kernel/../lib/types.h \
+  tests/../drivers/../kernel/../drivers/fs.h \
+  tests/../drivers/../kernel/../drivers/termios.h \
+  tests/../drivers/../kernel/../drivers/../lib/types.h \
+  tests/../drivers/../kernel/../drivers/keyboard.h \
+  tests/../drivers/../kernel/../drivers/i8259.h \
+  tests/../drivers/../kernel/../drivers/../lib/lib.h \
+  tests/../drivers/../kernel/../drivers/../lib/ring_buffer.h \
+  tests/../drivers/../kernel/../drivers/termios.h \
+  tests/../drivers/../kernel/../drivers/rtc.h \
+  tests/../drivers/../kernel/../drivers/pit.h tests/../lib/lib.h \
+  tests/tests_files.h
+rtc_test.o: tests/rtc_test.c tests/../drivers/rtc.h \
+  tests/../drivers/../lib/lib.h tests/../drivers/../lib/types.h \
+  tests/../drivers/i8259.h tests/../drivers/../lib/types.h \
+  tests/../lib/lib.h tests/../drivers/fs.h \
+  tests/../drivers/../multiboot.h tests/../drivers/../lib/types.h \
+  tests/../drivers/../kernel/pcb.h \
+  tests/../drivers/../kernel/../lib/types.h \
+  tests/../drivers/../kernel/../drivers/fs.h \
+  tests/../drivers/../kernel/../drivers/termios.h \
+  tests/../drivers/../kernel/../drivers/../lib/types.h \
+  tests/../drivers/../kernel/../drivers/keyboard.h \
+  tests/../drivers/../kernel/../drivers/i8259.h \
+  tests/../drivers/../kernel/../drivers/../lib/lib.h \
+  tests/../drivers/../kernel/../drivers/../lib/ring_buffer.h \
+  tests/../drivers/../kernel/../drivers/termios.h \
+  tests/../drivers/../kernel/../drivers/rtc.h \
+  tests/../drivers/../kernel/../drivers/pit.h tests/tests_files.h
+terminal_test.o: tests/terminal_test.c
+asm_linkage.o: kernel/asm_linkage.S kernel/asm_linkage.h
