@@ -1,6 +1,5 @@
 ECE391 MP3 - Package contents
 ================================
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2F1justinbarnett%2Flinux391)](https://hits.seeyoufarm.com)
 
 createfs
     This program takes a flat source directory (i.e. no subdirectories
