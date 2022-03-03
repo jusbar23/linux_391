@@ -53,31 +53,24 @@ read_dentry_by_name (const int8_t* fname, dentry_t * dentry)
 	int currFile;
 
 	//check for dentry null
-	if(dentry == NULL)
-		return -1;
+	if(dentry == NULL) return -1;
 
 	//Transversing the the inode block for 0 to 63
-	for(currFile = 0; currFile < num_directories; currFile++)
-	{
-
+	for(currFile = 0; currFile < num_directories; currFile++) {
 		//checking the length of the string using strlen
-		if(strlen(fname) != strlen(boot_block->dentry_directory[currFile].filename))
-			continue;
+		if(strlen(fname) != strlen(boot_block->dentry_directory[currFile].filename)) continue;
 		
 		//comparing the name of the 'file'
 		//if it's the same, the copy three thisng
 
-		if(strncmp(fname, boot_block->dentry_directory[currFile].filename, strlen(fname)) == 0)
-		{
+		if(strncmp(fname, boot_block->dentry_directory[currFile].filename, strlen(fname)) == 0) {
 			//copy the whole needed bytes for the dentry
 			memcpy(dentry, &(boot_block->dentry_directory[currFile]), sizeof(dentry_t));
 			return 0;
 		}
-
 	}
 	// Filename not found
 	return -1;
-
 }
 
 /*
@@ -95,16 +88,14 @@ int32_t
 read_dentry_by_index(uint32_t index, dentry_t * dentry)
 {
 
-	if (index < num_directories && 
-		index >= 0 && 
-		dentry != NULL) 
-	{
+	if (index < num_directories && index >= 0 && dentry != NULL) {
 		//should ask which index is passed in
 		memcpy(dentry, &(boot_block->dentry_directory[index]), sizeof(dentry_t));
 		return 0;
 	}
-	else
+	else { 
 		return -1;
+	}
 }
 
 /*
@@ -128,10 +119,7 @@ read_data(uint32_t inode, uint32_t offset, uint8_t* buf, uint32_t length)
 	inode_t *inode_addr;
 	data_block_t *current_block;
 
-	if(inode < 0 || 
-	   buf == NULL || 
-	   length < 0 || 
-	   offset < 0)  // checking the parameter
+	if(inode < 0 || buf == NULL || length < 0 || offset < 0)  // checking the parameter
 		return -1;
 
 	inode_addr = (inode_t *) (((uint32_t) boot_block) + (inode + 1) * FOUR_KB); 						  // getting the address of the specific inode
@@ -142,26 +130,20 @@ read_data(uint32_t inode, uint32_t offset, uint8_t* buf, uint32_t length)
 
 	bytes_in_block_read = 0;
 
-	if (offset > file_length)
-		return 0;
+	if (offset > file_length) return 0;
 
 	// iterate through the entire length to read
-	for (i = 0; i < length; i++)
-	{
+	for (i = 0; i < length; i++) {
 		buf[i] = current_block->byte[offset % FOUR_KB];
 		// printf("Byte: 0x%#x, offset: %d\n", buf[i], offset);
 
-		if (++offset % FOUR_KB == 0)
-		{
+		if (++offset % FOUR_KB == 0) {
 			current_block = (data_block_t *) (data_block_addr + (inode_addr->data[offset/FOUR_KB] * FOUR_KB));
 		}
 		
-		if (offset > file_length)
-			break;
+		if (offset > file_length) break;
 
 		bytes_in_block_read++;
-
-
 	}
 
 	return bytes_in_block_read;
@@ -184,17 +166,14 @@ file_open(const uint8_t *filename)
 	void * file_op_tbl;
 	int fd;
 
-	if (read_dentry_by_name((int8_t *)filename, &dentry))
-		return -1;
+	if (read_dentry_by_name((int8_t *)filename, &dentry)) return -1;
 
 	//Check if the file type is a file, if it is then
 	//set the inode index accordingly, otherwise set it to -1 (null)
 
-	if ((fd = pcb_open(curr_pcb, file_op_tbl)) == -1)
-		return -1;
+	if ((fd = pcb_open(curr_pcb, file_op_tbl)) == -1) return -1;
 
-	switch (dentry.filetype)
-	{
+	switch (dentry.filetype) {
 		case FILE_TYPE:
 			curr_pcb->elements[fd].file_operation_jmp_tbl = (void *) file_driver;
 			break;
@@ -207,8 +186,7 @@ file_open(const uint8_t *filename)
 			break;
 	}
 	
-	if (dentry.filetype == FILE_TYPE)
-		curr_pcb->elements[fd].inode_ptr = dentry.inode_index;
+	if (dentry.filetype == FILE_TYPE) curr_pcb->elements[fd].inode_ptr = dentry.inode_index;
 
 	return fd;
 }
@@ -296,8 +274,7 @@ file_read(uint32_t fd, void* buf, uint32_t bytes)
 
     // file is not in use and fails
     // file is directory or RTC then fails
-    if (!file->flags)
-        return -1;
+    if (!file->flags) return -1;
 
 	bytes_read = read_data((uint32_t) file->inode_ptr, file->file_position, buf, bytes);
 	file->file_position += bytes_read;
@@ -363,8 +340,7 @@ dir_read(int file_desc, void* buf, uint32_t bytes)
 	//currentPCB
 	pcb_t* curr_pcb= pcb_process();
 
-	if(curr_pcb->elements[file_desc].file_position>=num_directories)
-		return 0;
+	if(curr_pcb->elements[file_desc].file_position>=num_directories) return 0;
 
 	read_dentry_by_index (curr_pcb->elements[file_desc].file_position,dentry_);
 
@@ -375,8 +351,7 @@ dir_read(int file_desc, void* buf, uint32_t bytes)
 }
 
 int
-dir_write(int file_desc, void* buf, uint32_t bytes)
-{
+dir_write(int file_desc, void* buf, uint32_t bytes) {
 	return -1;
 }
 
@@ -390,8 +365,7 @@ dir_write(int file_desc, void* buf, uint32_t bytes)
  */
 
 int
-dir_close()
-{
+dir_close() {
 	return 0;
 }
 
@@ -405,8 +379,7 @@ dir_close()
  */
 
 int32_t
-loader(const int8_t * filename)
-{
+loader(const int8_t * filename) {
 	dentry_t dentry;
 	uint8_t entry_point[4];
 	uint32_t ret_val = 0;
@@ -424,8 +397,7 @@ loader(const int8_t * filename)
 	// Grabs entry point
 	read_data(dentry.inode_index, ENTRY_POINT_OFFSET, entry_point, ENTRY_POINT_SIZE);
 
-	for (i = 0; i < ENTRY_POINT_SIZE; i++)
-	{
+	for (i = 0; i < ENTRY_POINT_SIZE; i++) {
 		ret_val |= entry_point[i] << (i * EIGHT_BITS_IN_A_BYTE);
 	}
 
@@ -442,13 +414,11 @@ loader(const int8_t * filename)
  */
 
 uint8_t
-executable_check(dentry_t * dentry)
-{
+executable_check(dentry_t * dentry) {
 	unsigned char magic_buf[4];
 
 	// Read the four magic numbers in the beginning to check if it's an executable
-	if (!read_data(dentry->inode_index, 0, magic_buf, EXEC_MAGIC_NUM_COUNT))
-		return 0;
+	if (!read_data(dentry->inode_index, 0, magic_buf, EXEC_MAGIC_NUM_COUNT)) return 0;
 
 	return !(magic_buf[0] == EXEC_MAGIC_0 &&
 			magic_buf[1] == EXEC_MAGIC_1 &&
